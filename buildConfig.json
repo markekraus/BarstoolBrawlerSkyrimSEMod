@@ -1,0 +1,22 @@
+{
+  "$schema": "http://mekschemas.netlify.app/modpackager/v1/",
+  "SkyrimSEInstallPath": "D:\\Steam\\steamapps\\common\\Skyrim Special Edition",
+  "UnfuzerPath": "D:\\Steam\\steamapps\\common\\Skyrim Special Edition\\Tools\\unfuzer",
+  "ModInfo": {
+    "Name": "Barstool Brawler",
+    "Version": "1.0.0",
+    "Author": "Mark E. Kraus",
+    "Description": "Adds a Barstool weapon to Skyrim.",
+    "Website": "https://www.nexusmods.com/skyrimspecialedition/mods/61354",
+    "Category": "Weapons",
+    "Logo": "logo.png"
+  },
+  "Plugin":"MarkekrausBarstoolBrawler.esp",
+  "Scripts": [
+    "MEKBBModInitialization"
+  ],
+  "Meshes": [
+    "weapons\\barstools\\1stPersonBarstool.nif"
+  ],
+  "PackageName": "MarkekrausBarstoolBrawler.7z"
+}
