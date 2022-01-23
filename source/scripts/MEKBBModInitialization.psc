@@ -29,19 +29,28 @@ string UpdateText = "Barstool Brawler Updated to "
 string LogPrefix = "[MEKBB] "
 
 Event OnInit()
-    RegisterForSingleUpdate(10.0)
+    RegisterForSingleUpdate(1.0)
 EndEvent
 
 Event OnPlayerLoadGame()
-    RegisterForSingleUpdate(10.0)
+    RegisterForSingleUpdate(1.0)
 EndEvent
 
 Event OnUpdate()
+    bool updated = false
     If (StoredModVersion < 1.0)
         Maintenance()
         StoredModVersion = 1.0
         Debug.Notification(UpdateText + "1.0")
-    Else
+        updated = true
+    EndIf
+    If (StoredModVersion < 1.1)
+        Maintenance()
+        StoredModVersion = 1.1
+        Debug.Notification(UpdateText + "1.1")
+        updated = true
+    EndIf
+    If (!updated)
         Maintenance()
     EndIf
 EndEvent
@@ -55,6 +64,7 @@ Function Maintenance()
     UpdateBaseLeveledLists1_0()
     UpdateImmersvieWeapons1_0()
     UpdateValdacilsItemSorting1_0()
+    UpdateImmersvieWeapons1_1()
     TraceLog("=================Maintenance End===================")
 EndFunction
 
@@ -166,34 +176,47 @@ Function UpdateImmersvieWeapons1_0()
     EndIf
     TraceLog("Immersive Weapons Detected. Updating leveled lists")
 
-    int IWLIWeaponWarhammer = 0x0001CB26
+                                       int IWLIWeaponWarhammer = 0x0001CB26
     UpdateRemoteItemList(ImmersiveWeapons, IWLIWeaponWarhammer, MEKBBBarstool, 1, 1, 1)
 
-    int IWLIBanditWarhammer = 0x0001D603
+                                       int IWLIBanditWarhammer = 0x0001D603
     UpdateRemoteItemList(ImmersiveWeapons, IWLIBanditWarhammer, MEKBBBarstool, 1, 1, 1)
 
-    int IWLISoldierSonsWeapon2H = 0x0001F0F6
+                                       int IWLISoldierSonsWeapon2H = 0x0001F0F6
     UpdateRemoteItemList(ImmersiveWeapons, IWLISoldierSonsWeapon2H, MEKBBBarstool, 1, 1, 1)
 
-    int IWLITownWarhammer = 0x000365C4
+                                       int IWLITownWarhammer = 0x000365C4
     UpdateRemoteItemList(ImmersiveWeapons, IWLITownWarhammer, MEKBBBarstool, 2, 1, 1)
 
-    int IWLI_ListWarhammer = 0x00039B9E
+                                       int IWLI_ListWarhammer = 0x00039B9E
     UpdateRemoteItemList(ImmersiveWeapons, IWLISoldierSonsWeapon2H, MEKBBBarstool, 1, 1, 1)
 
-    int IWLIBoss2H = 0x0003FCB7
+                                       int IWLIBoss2H = 0x0003FCB7
     UpdateRemoteItemList(ImmersiveWeapons, IWLIBoss2H, MEKBBBarstool, 1, 1, 1)
 
-    int IWLIBlacksmithWarhammer = 0x00040CF6
+                                       int IWLIBlacksmithWarhammer = 0x00040CF6
     UpdateRemoteItemList(ImmersiveWeapons, IWLIBlacksmithWarhammer, MEKBBBarstool, 1, 1, 1)
 
-    int IWLIBestWarhammer = 0x00040CF7
+                                       int IWLIBestWarhammer = 0x00040CF7
     UpdateRemoteItemList(ImmersiveWeapons, IWLIBestWarhammer, MEKBBBarstool, 1, 1, 1)
 
-    int IWLIDraugr2H = 0x000417C7
+                                       Int IWLIDraugr2H = 0x000417C7
     UpdateRemoteItemList(ImmersiveWeapons, IWLIDraugr2H, MEKBBBarstool, 1, 1, 1)
 
     TraceLog("Immersive Weapons leveled lists updated.")
+EndFunction
+
+Function UpdateImmersvieWeapons1_1()
+    If (Game.GetModByName(ImmersiveWeapons) == 255)
+        Return
+    EndIf
+    If (StoredImmersiveWeaponsVersion < 1.1)
+        StoredImmersiveWeaponsVersion = 1.1
+    Else
+        Return
+    EndIf
+                                       int IWLI_ListWarhammer = 0x00039B9E
+    UpdateRemoteItemList(ImmersiveWeapons, IWLI_ListWarhammer, MEKBBBarstool, 1, 1, 1)
 EndFunction
 
 Function UpdateValdacilsItemSorting1_0()
